@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RED — TAPANG (fixed)</title>
+<style>
+  :root{--team-color:#e53935;}
+  html,body{height:100%;margin:0;padding:0;font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:#000;color:#fff;overflow:hidden;}
+  .app{position:relative;height:100%;width:100%;}
+  .page{position:absolute;inset:0;background-position:center;background-size:cover;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease, transform .3s ease;transform:translateY(10px);z-index:1;}
+  .page.show{opacity:1;pointer-events:auto;transform:none;}
+  .content-box{width:86%;max-width:1100px;height:62%;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);backdrop-filter:blur(4px);box-shadow:0 14px 40px rgba(0,0,0,.6);padding:18px;text-align:center;color:rgba(255,255,255,.95);font-weight:600;}
+  .welcome-sub{font-size:24px;}.welcome-sub .w{color:blue;font-weight:800}.welcome-sub .t{color:red;font-weight:800;}
+  .welcome-main{font-size:48px;color:gold;font-weight:800;line-height:1.02;margin-top:6px;}
+  .tap-btn{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:40;}
+  .btn{padding:10px 16px;border-radius:10px;border:0;background:rgba(255,255,255,.08);color:#fff;font-weight:700;cursor:pointer;}
+  .ticket{background:rgba(0,0,0,.36);padding:18px;border-radius:12px;}
+  .ticket .name{font-size:36px;font-weight:800;}
+  .ticket .meta{margin-top:8px;font-size:16px;}
+  .modal-back{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:85;}
+  .modal{background:#fff;color:#111;padding:18px;border-radius:12px;min-width:300px;text-align:center;}
+  .btn-green{background:green;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;margin:6px;}
+  .btn-red{background:red;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;margin:6px;}
+  canvas#confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:90;}
+  .name-input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:#fff;width:320px;}
+  .small{font-size:13px;color:rgba(255,255,255,.8);margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="confetti"></canvas>
+
+  <!-- PAGE 1 -->
+  <section id="p1" class="page show" style="background-image:url(images/intro.png);"></section>
+
+  <!-- PAGE 2: Welcome -->
+  <section id="p2" class="page" style="background-image:url(images/cwts\ -\ 1.png);">
+    <div class="content-box" style="flex-direction:column">
+      <div class="welcome-sub"><span class="w">Welcome</span> <span class="t">to</span></div>
+      <div class="welcome-main">THE PISTOLYMPICS: IGNITING THE FILIPINONESS</div>
+      <div style="margin-top:18px"><button id="enterBtn" class="btn">ENTER</button></div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: Color Reveal -->
+  <section id="p3" class="page" style="background-image:url(images/track-bg.jpeg);">
+    <div class="content-box" id="colorBox">Tap the screen or use TAP TAP to reveal</div>
+    <div class="tap-btn"><button id="tapBtn" class="btn">TAP TAP</button></div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section id="p4" class="page" style="background-image:url(images/Copy\ of\ cwts\ -\ 3.png);"></section>
+  <!-- PAGE 5 -->
+  <section id="p5" class="page" style="background-image:url(images/Copy\ of\ cwts\ -\ 4.png);"></section>
+  <!-- PAGE 6 -->
+  <section id="p6" class="page" style="background-image:url(images/Copy\ of\ cwts\ -\ 5.png);"></section>
+
+  <!-- PAGE 7: Popup -->
+  <section id="p7" class="page" style="background:rgba(0,0,0,.6);">
+    <div class="content-box" style="flex-direction:column">
+      <div style="font-weight:800;margin-bottom:12px">SURPRISE!</div>
+      <img src="images/IMG_5112-removebg-preview.png" alt="popup" style="max-width:60%;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.6);" />
+      <div style="margin-top:14px"><button id="to8" class="btn">Continue</button></div>
+    </div>
+  </section>
+
+  <!-- PAGE 8: Tap anywhere to go to ticket -->
+  <section id="p8" class="page" style="background-image:url(images/Copy\ of\ cwts.png); background-size:cover; background-position:center; cursor:pointer;"></section>
+
+<!-- PAGE 9: Ticket with name input -->
+<section id="p9" class="page" style="background-image:url(images/cwts\ -\ 1.png)">
+  <div class="content-box">
+    <button id="openNameInput">Enter Name</button>
+    <div class="ticket" id="ticket">
+      <img src="images/IMG_5112-removebg-preview.png">
+      <h1 id="ticketName">[NAME]</h1>
+      <div style="font-weight:700;">RED — TAPANG</div>
+      <p>JANUARY 11, 2026<br>8:00 AM - 4:00 PM<br>PUP TENNIS COURT</p>
+    </div>
+  </div>
+</section>
+<!-- MODAL: Name input -->
+<div id="nameModal" class="modal-back">
+  <div class="modal">
+    <h3>Enter Your Name</h3>
+    <input id="nameInput" class="name-input" maxlength="40">
+    <div style="margin-top:12px;">
+      <button id="nameSubmit" class="btn-green">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="modal-back">
+    <div class="modal">
+      <h3>Is your name correct?</h3>
+      <div id="previewName" style="font-weight:800;margin:10px 0"></div>
+      <div>
+        <button id="yesBtn" class="btn-green">Yes</button>
+        <button id="noBtn" class="btn-red">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot Modal -->
+  <div id="screenshotModal" class="modal-back">
+    <div class="modal">
+      <h3>Screenshot Reminder</h3>
+      <p>Please screenshot your ticket now — this will serve as your entry pass.</p>
+      <div style="margin-top:12px"><button id="okShot" class="btn-green">Okay</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* --- Page controller --- */
+const pageIds = ['p1','p2','p3','p4','p5','p6','p7','p8','p9'];
+const pages = Object.fromEntries(pageIds.map(id=>[id, document.getElementById(id)]));
+function showPage(id){
+  pageIds.forEach(pid=>{
+    pages[pid].style.zIndex = (pid === id ? 50 : 10);
+    pages[pid].classList.toggle('show', pid === id);
+  });
+}
+
+/* --- Confetti --- */
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+resize(); addEventListener('resize', resize);
+
+function launchConfetti(color = getComputedStyle(document.documentElement).getPropertyValue('--team-color') || '#e53935', count=140, duration=3500){
+  const pieces = []; const now=performance.now();
+  for(let i=0;i<count;i++){
+    pieces.push({x:Math.random()*canvas.width,y:-Math.random()*200,w:6+Math.random()*12,h:8+Math.random()*10,vx:(Math.random()-0.5)*1.4,vy:2+Math.random()*4,rot:Math.random()*360,rotV:(Math.random()-0.5)*0.2,color:color.trim(),dieAt:now+duration+Math.random()*600});
+  }
+  function frame(t){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const p of pieces){ p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotV;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+    }
+    let alive = pieces.filter(p => t < p.dieAt && p.y < canvas.height+50);
+    if(alive.length){ requestAnimationFrame(frame); } else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* --- Page 1 click -> swap image -> show Page 2 + confetti --- */
+let p1Switched=false;
+pages.p1.addEventListener('click',()=>{
+  if(p1Switched) return;
+  p1Switched=true;
+  pages.p1.style.backgroundImage="url('placeholder-red-1b.jpg')";
+  setTimeout(()=>{ showPage('p2'); launchConfetti(); },300);
+});
+
+/* --- Page 2 ENTER -> Page 3 --- */
+document.getElementById('enterBtn').addEventListener('click',()=>showPage('p3'));
+
+/* --- Page3: sequential taps for color reveal --- */
+let tapCount=0;
+const seq=['p4','p5','p6'];
+function colorAdvance(){
+  if(tapCount<seq.length){ showPage(seq[tapCount]); tapCount++; } 
+  else{ showPage('p7'); launchConfetti(getComputedStyle(document.documentElement).getPropertyValue('--team-color') || '#e53935',220,3800); }
+}
+pages.p3.addEventListener('click',colorAdvance);
+document.getElementById('tapBtn').addEventListener('click',colorAdvance);
+seq.forEach(pid=>pages[pid].addEventListener('click',colorAdvance));
+
+/* --- Page7 Continue -> Page8 --- */
+document.getElementById('to8').addEventListener('click',()=>{
+  // Show PAGE 8
+  pageIds.forEach(pid=>pages[pid].classList.remove('show'));
+  pages['p8'].classList.add('show');
+  pages['p8'].style.zIndex=50;
+  // Tap anywhere to go to ticket
+  pages['p8'].onclick = ()=>{
+    pages['p8'].onclick=null;
+    showPage('p9');
+    document.getElementById('nameInput').focus();
+  };
+});
+
+/* --- Page9 ticket workflow --- */
+// NAME input → ticket
+document.getElementById('openNameInput').addEventListener('click',()=>{document.getElementById('nameModal').style.display='flex';});
+document.getElementById('nameSubmit').addEventListener('click',()=>{
+  const name=document.getElementById('nameInput').value.trim();
+  if(!name){alert('Enter your name!');return;}
+  document.getElementById('ticketName').textContent=name;
+  document.getElementById('ticket').style.display='block';
+  document.getElementById('nameModal').style.display='none';
+});
+
+document.getElementById('yesBtn').addEventListener('click',()=>{
+  const name=document.getElementById('confirmModal').dataset.tempName||'[NAME]';
+  document.getElementById('confirmModal').style.display='none';
+  document.getElementById('ticketName').textContent=name;
+  document.getElementById('ticketColor').textContent='RED — TAPANG';
+  document.getElementById('screenshotModal').style.display='flex';
+});
+document.getElementById('noBtn').addEventListener('click',()=>{
+  document.getElementById('confirmModal').style.display='none';
+  const re = prompt('Re-enter your name (max 40 chars):')||'';
+  const name=re.trim().slice(0,40);
+  if(!name) return;
+  document.getElementById('ticketName').textContent=name;
+  document.getElementById('ticketColor').textContent='RED — TAPANG';
+  document.getElementById('screenshotModal').style.display='flex';
+});
+document.getElementById('okShot').addEventListener('click',()=>document.getElementById('screenshotModal').style.display='none');
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&document.querySelector('.page.show')===pages.p9){ document.getElementById('confirmBtn').click(); }});
+
+resize();
+</script>
+</body>
+</html>
