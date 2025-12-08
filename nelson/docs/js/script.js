@@ -97,4 +97,8 @@ document.getElementById('noBtn').addEventListener('click',()=>{
 document.getElementById('okShot').addEventListener('click',()=>document.getElementById('screenshotModal').style.display='none');
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&document.querySelector('.page.show')===pages.p9){ document.getElementById('confirmBtn').click(); }});
 
+<<<<<<< HEAD
 resize();
+=======
+resize();
+>>>>>>> cea184d8b0c076dfb43a6ef067d5fb9dfedeb9f0
