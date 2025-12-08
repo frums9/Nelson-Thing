@@ -17,8 +17,4 @@
   .btn-red{background:red;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;margin:6px;}
   canvas#confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:90;}
   .name-input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:#fff;width:320px;}
-<<<<<<< HEAD
   .small{font-size:13px;color:rgba(255,255,255,.8);margin-top:10px;}
-=======
-  .small{font-size:13px;color:rgba(255,255,255,.8);margin-top:10px;}
->>>>>>> cea184d8b0c076dfb43a6ef067d5fb9dfedeb9f0
