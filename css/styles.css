@@ -1,0 +1,244 @@
+:root {
+    --team-color: #e53935;  /* The main Red color */
+    --gold: #ffd700;        /* Trophy Gold */
+}
+
+/* Reset & Basics */
+* { box-sizing: border-box; }
+html, body {
+    margin: 0;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden; /* Prevents scrolling */
+}
+
+/* =========================================
+   1. PAGE SYSTEM
+   ========================================= */
+.app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.page {
+    position: absolute;
+    inset: 0;
+    /* Default: Cover the screen (Good for backgrounds) */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease; /* Smooth fade */
+    z-index: 1;
+}
+
+/* Active Page */
+.page.show {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 50;
+}
+
+/* Mobile Fix: Prevents "The Pot" from being cut off */
+.page.fit-image {
+    background-size: contain; 
+    background-color: #000; /* Black bars on top/bottom */
+}
+
+/* =========================================
+   2. BACKGROUND MAPPING (The Important Part!)
+   ========================================= */
+/* Make sure these match the filenames we renamed earlier! */
+
+.bg-intro    { background-image: url('../images/intro-door.png'); }
+.bg-welcome  { background-image: url('../images/welcome-rainbow.png'); }
+.bg-track    { background-image: url('../images/track-bg.jpg'); }
+
+/* The Game Sequence */
+.bg-pot1     { background-image: url('../images/pot-1.png'); }
+.bg-pot2     { background-image: url('../images/pot-2.png'); }
+.bg-pot3     { background-image: url('../images/pot-3.png'); }
+
+/* Information Pages */
+.bg-program  { background-image: url('../images/program.png'); }
+.bg-ticket   { background-image: url('../images/ticket-bg.png'); }
+
+/* The Missing Page 10 Fix: Reusing the Rainbow background */
+.bg-thankyou { background-image: url('../images/welcome-rainbow.png'); }
+
+
+/* =========================================
+   3. BOXES & TEXT
+   ========================================= */
+.box {
+    width: 85%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.55); /* Dark transparent box */
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.box.transparent {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.box.border-red {
+    border: 4px solid var(--team-color);
+}
+
+/* Typography */
+.welcome-sub { font-size: 1.5rem; margin-bottom: 5px; opacity: 0; transform: translateY(-20px); transition: 1s ease; }
+.welcome-sub .w { color: #448aff; font-weight: 900; }
+.welcome-sub .t { color: #ff5252; font-weight: 900; }
+
+.welcome-main {
+    font-size: 2.5rem; /* Big for desktop */
+    color: var(--gold);
+    font-weight: 900;
+    line-height: 1.1;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    margin: 15px 0;
+    opacity: 0; transform: translateY(-20px); transition: 1s ease 0.2s; /* Slight delay */
+}
+
+/* Mobile Text Adjustment */
+@media (max-width: 600px) {
+    .welcome-main { font-size: 1.8rem; } /* Smaller for phones */
+    .welcome-sub { font-size: 1.2rem; }
+}
+
+.thank-you-text {
+    font-size: 3rem;
+    color: var(--gold);
+    text-shadow: 0 5px 15px #000;
+    font-weight: 900;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* =========================================
+   4. UI ELEMENTS (Buttons, Inputs, Images)
+   ========================================= */
+.btn-main {
+    background: #222;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 14px 32px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.btn-main:active { transform: scale(0.95); background: #444; }
+
+.mascot-img {
+    width: 60%;
+    max-width: 200px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    margin: 15px 0;
+}
+
+.cursor-pointer { cursor: pointer; }
+
+/* =========================================
+   5. TICKET DESIGN
+   ========================================= */
+.ticket {
+    width: 100%;
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    border: 4px solid #ff8a80;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine Effect */
+.ticket::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+.ticket.hidden { display: none; }
+.ticket .name { font-size: 2rem; font-weight: 900; margin: 10px 0; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.ticket-header { font-size: 1.2rem; font-weight: 800; color: rgba(255,255,255,0.9); }
+.ticket-sub { font-size: 0.9rem; margin-top: 5px; color: rgba(255,255,255,0.8); }
+.ticket .meta { margin-top: 15px; font-size: 0.85rem; line-height: 1.5; font-weight: 500; opacity: 0.9; }
+
+/* =========================================
+   6. MODALS
+   ========================================= */
+.modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none; /* Flex when active */
+    justify-content: center; align-items: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.modal {
+    background: #fff;
+    color: #222;
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.modal h3 { margin-top: 0; color: #333; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin: 15px 0;
+    text-align: center;
+}
+input:focus { border-color: var(--team-color); outline: none; }
+
+.btn-group { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+.btn-green, .btn-red {
+    border: none; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; flex: 1;
+}
+.btn-green { background: #2e7d32; }
+.btn-red { background: #c62828; }
+
+/* Canvas */
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 99; }
+
+/* Animation Keyframes */
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}

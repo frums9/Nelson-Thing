@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RED — TAPANG</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <link rel="preload" as="image" href="images/intro-door.png">
+</head>
+<body>
+
+    <audio id="confettiSound" src="images/confetti.mp3" preload="auto"></audio>
+    <audio id="smashSound" src="images/smash.mp3" preload="auto"></audio>
+    <canvas id="confetti"></canvas>
+
+    <div class="app-container">
+
+        <section id="p1" class="page show bg-intro"></section>
+
+        <section id="p2" class="page bg-welcome">
+            <div class="box welcome-anim-container">
+                <div class="welcome-sub">
+                    <span class="w">Welcome</span> <span class="t">to</span>
+                </div>
+                <div class="welcome-main">THE PISTOLYMPICS: IGNITING THE FILIPINONESS</div>
+                <button id="enterBtn" class="btn-main">ENTER</button>
+            </div>
+        </section>
+
+        <section id="p3" class="page bg-track">
+            <button id="tapBtn" class="btn-main">TAP TAP</button>
+        </section>
+
+        <section id="p4" class="page fit-image bg-pot1"></section>
+        <section id="p5" class="page fit-image bg-pot2"></section>
+        <section id="p6" class="page fit-image bg-pot3"></section>
+
+        <section id="p7" class="page overlay-dark">
+            <div class="box border-red">
+                <h2 class="text-red">RED — TAPANG</h2>
+                <img src="images/IMG_5112-removebg-preview.png" class="mascot-img" alt="Mascot">
+                <button id="to8" class="btn-main">CONTINUE</button>
+            </div>
+        </section>
+
+        <section id="p8" class="page fit-image bg-program cursor-pointer"></section>
+
+        <section id="p9" class="page bg-ticket">
+            <div class="box">
+                <div id="ticket" class="ticket hidden">
+                    <img src="images/IMG_5112-removebg-preview.png" width="100" alt="Icon">
+                    <div class="name" id="tName">[NAME]</div>
+                    <div class="ticket-header">RED — TAPANG</div>
+                    <div class="ticket-sub">UNANG ISTASYON: LAKAS NG BAYAN</div>
+                    <div class="meta">
+                        JAN 11, 2026<br>
+                        8:00 AM – 4:00 PM<br>
+                        PUP TENNIS COURT
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="p10" class="page fit-image bg-thankyou">
+            <div class="box transparent">
+                <h1 class="thank-you-text">THANK YOU FOR JOINING!</h1>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="nameModal" class="modal-bg">
+        <div class="modal">
+            <h3>Enter your name</h3>
+            <input type="text" id="nameInput" placeholder="Full Name (Max 40 chars)" maxlength="40">
+            <div class="btn-group">
+                <button id="saveName" class="btn-green">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal-bg">
+        <div class="modal">
+            <h3>Is your name correct?</h3>
+            <div id="preview" class="name-preview"></div>
+            <div class="btn-group">
+                <button id="yes" class="btn-green">YES</button>
+                <button id="no" class="btn-red">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="shotModal" class="modal-bg">
+        <div class="modal">
+            <h3>Please screenshot your ticket</h3>
+            <p>This will serve as your entry pass.</p>
+            <div class="btn-group">
+                <button id="ok" class="btn-green">OKAY</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
