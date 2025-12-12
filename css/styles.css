@@ -41,15 +41,15 @@ html, body {
 }
 
 /* Page Backgrounds */
-#p1 { background-image: url('../images/intro.png'); }
-#p2 { background-image: url('../images/cwts-1.png'); }
-#p3 { background-image: url('../images/track-bg.jpeg'); }
-#p4 { background-image: url('../images/Copy-of-cwts-3.png'); }
-#p5 { background-image: url('../images/Copy-of-cwts-4.png'); }
-#p6 { background-image: url('../images/Copy-of-cwts-5.png'); }
+#p1 { background-image: url('../images/intro.jpg'); }
+#p2 { background-image: url('../images/cwts-1.jpg'); }
+#p3 { background-image: url('../images/track-bg.jpg'); }
+#p4 { background-image: url('../images/Copy-of-cwts-3.jpg'); }
+#p5 { background-image: url('../images/Copy-of-cwts-4.jpg'); }
+#p6 { background-image: url('../images/Copy-of-cwts-5.jpg'); }
 #p7 { background-color: rgba(0,0,0,0.6); } /* Overlay page */
-#p8 { background-image: url('../images/Copy-of-cwts.png'); }
-#p9 { background-image: url('../images/cwts-1.png'); }
+#p8 { background-image: url('../images/Copy-of-cwts.jpg'); }
+#p9 { background-image: url('../images/cwts-1.jpg'); }
 
 /* --- Content Boxes --- */
 .content-box {
@@ -167,4 +167,5 @@ canvas#confetti {
     height: 100%;
     pointer-events: none;
     z-index: 90;
+
 }
