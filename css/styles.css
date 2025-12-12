@@ -57,21 +57,21 @@ html, body {
    ========================================= */
 /* Make sure these match the filenames we renamed earlier! */
 
-.bg-intro    { background-image: url('../images/intro-door.png'); }
-.bg-welcome  { background-image: url('../images/welcome-rainbow.png'); }
+.bg-intro    { background-image: url('../images/intro-door.jpg'); }
+.bg-welcome  { background-image: url('../images/welcome-rainbow.jpg'); }
 .bg-track    { background-image: url('../images/track-bg.jpg'); }
 
 /* The Game Sequence */
-.bg-pot1     { background-image: url('../images/pot-1.png'); }
-.bg-pot2     { background-image: url('../images/pot-2.png'); }
-.bg-pot3     { background-image: url('../images/pot-3.png'); }
+.bg-pot1     { background-image: url('../images/pot-1.jpg'); }
+.bg-pot2     { background-image: url('../images/pot-2.jpg'); }
+.bg-pot3     { background-image: url('../images/pot-3.jpg'); }
 
 /* Information Pages */
-.bg-program  { background-image: url('../images/program.png'); }
-.bg-ticket   { background-image: url('../images/ticket-bg.png'); }
+.bg-program  { background-image: url('../images/program.jpg'); }
+.bg-ticket   { background-image: url('../images/ticket-bg.jpg'); }
 
 /* The Missing Page 10 Fix: Reusing the Rainbow background */
-.bg-thankyou { background-image: url('../images/welcome-rainbow.png'); }
+.bg-thankyou { background-image: url('../images/welcome-rainbow.jpg'); }
 
 
 /* =========================================
@@ -241,4 +241,5 @@ input:focus { border-color: var(--team-color); outline: none; }
 @keyframes popIn {
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
+
 }
